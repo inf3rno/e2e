@@ -1,0 +1,1 @@
+module.exports = "http://localhost:9876/base/test/pages";

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Scripted With Errors</title>
+    <script>
+        console.log(notDeclaredVariable);
+    </script>
+    <script>
+        throw new Error("An error was thrown.");
+    </script>
+    <script>
+        new Promise(function (resolve, reject) {
+            reject(new Error("A promise was rejected."));
+        });
+    </script>
+</head>
+<body>
+</body>
+</html>

@@ -1,4 +1,7 @@
 # e2e-testing
+
+[![Build Status](https://travis-ci.org/inf3rno/e2e-testing.svg?branch=master)](https://travis-ci.org/inf3rno/e2e-testing)
+
 End to end testing with client side javascript.
 
 ## installation

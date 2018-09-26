@@ -13,9 +13,12 @@ describe("cross-origin, cross-frame communication", function () {
 
     it("should load google.com", async function () {
         await navigator.load("https://www.google.com");
-        const searchButtonLegend = window.document.forms["f"]["btnK"].value;
-        const isGoogleInTheLegend = searchButtonLegend.indexOf("Google") != -1;
-        expect(isGoogleInTheLegend).to.equal(true);
+        const searchForm = window.document.forms["f"];
+        expect(!!searchForm).to.equal(true);
+        const searchButton = searchForm["btnK"];
+        expect(!!searchButton).to.equal(true);
+        const searchButtonLegend = searchButton.value;
+        expect(searchButtonLegend).to.not.equal("");
     });
 
     it("should throw navigation error by an unregistered domain", async function () {

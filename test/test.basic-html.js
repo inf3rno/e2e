@@ -16,8 +16,7 @@ describe("basic navigation", function () {
         expect(linkedPage.location.href).to.match(/\/hyperlink\.html$/);
         const links = linkedPage.getElementsByTagName("a");
         const linkToFollow = links[0];
-        linkToFollow.click();
-        const emptyPage = await navigator.loaded();
+        const emptyPage = await navigator.follow(linkToFollow);
         expect(emptyPage.location.href).to.match(/\/empty\.html$/);
     });
 

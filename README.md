@@ -20,31 +20,27 @@ A simple test with Mocha and Chai.expect looks like this:
 
 ```js
 const expect = require("chai").expect;
-const e2e = require("e2e-testing");
+const e2e = require("./e2e");
+const navigator = e2e.openWindow({
+    silent: true
+});
 
-describe("google.com", function () {
+describe("cross-origin, cross-frame communication", function () {
 
-	let window, navigator;
+    it("should load google.com", async function () {
+        const searchPage = await navigator.load("https://www.google.com");
+        const searchInput = searchPage.querySelector("input[type=text]");
+        expect(searchInput != null).to.equal(true);
+        searchInput.value = "rembrandt van rijn";
+        const searchForm = searchInput.closest("form");
+        searchForm.submit();
+        const resultsPage = await navigator.loaded();
+        expect(resultsPage.documentElement.innerHTML.indexOf("Rembrandt - Wikipedia") !== -1).to.equal(true);
+    });
 
-	before(function () {
-		({window, navigator} = e2e.openWindow());
-	});
-
-	describe("the main page", function () {
-
-		it("should contain a search button with Google in the legend on the main page", async function () {
-			await navigator.load("https://www.google.com");
-			const searchButtonLegend = window.document.forms["f"]["btnK"].value;
-			const isGoogleInTheLegend = searchButtonLegend.indexOf("Google") != -1;
-			expect(isGoogleInTheLegend).to.equal(true);
-		});
-
-	});
-
-	after(function () {
-		e2e.closeWindow(window);
-	});
-
+    after(function () {
+        navigator.closeWindow();
+    });
 });
 ```
 

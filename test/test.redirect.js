@@ -1,25 +1,18 @@
 const expect = require("chai").expect;
 const e2e = require("./e2e");
 const pages = require("./pages");
+const navigator = e2e.openWindow();
 
-describe("e2e", function () {
+describe("scripted redirection", function () {
 
-    let window, navigator;
-
-    before(function () {
-        ({window, navigator} = e2e.openWindow());
-    });
-
-    it("should recognize client based redirection", async function () {
-        await navigator.load(`${pages}/redirect.html`);
-        expect(window.location.href).to.match(/\/redirect\.html$/);
-        await new Promise(function (resolve) {
-            setTimeout(resolve, 250);
-        });
-        expect(window.location.href).to.match(/\/empty\.html$/);
+    it("should recognize scripted redirection", async function () {
+        const redirectedPage = await navigator.load(`${pages}/redirect.html`);
+        expect(redirectedPage.location.href).to.match(/\/redirect\.html$/);
+        const emptyPage = await navigator.loaded();
+        expect(emptyPage.location.href).to.match(/\/empty\.html$/);
     });
 
     after(function () {
-        e2e.closeWindow(window);
+        navigator.closeWindow();
     });
 });

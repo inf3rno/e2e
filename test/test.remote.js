@@ -1,24 +1,20 @@
 const expect = require("chai").expect;
 const e2e = require("./e2e");
+const navigator = e2e.openWindow({
+    silent: true
+});
 
 describe("cross-origin, cross-frame communication", function () {
 
-    let window, navigator;
-
-    before(function () {
-        ({window, navigator} = e2e.openWindow({
-            silent: true
-        }));
-    });
-
     it("should load google.com", async function () {
-        await navigator.load("https://www.google.com");
-        const searchForm = window.document.forms["f"];
-        expect(!!searchForm).to.equal(true);
-        const searchButton = searchForm["btnK"];
-        expect(!!searchButton).to.equal(true);
-        const searchButtonLegend = searchButton.value;
-        expect(searchButtonLegend).to.not.equal("");
+        const searchPage = await navigator.load("https://www.google.com");
+        const searchInput = searchPage.querySelector("input[type=text]");
+        expect(searchInput != null).to.equal(true);
+        searchInput.value = "rembrandt van rijn";
+        const searchForm = searchInput.closest("form");
+        searchForm.submit();
+        const resultsPage = await navigator.loaded();
+        expect(resultsPage.documentElement.innerHTML.indexOf("Rembrandt - Wikipedia") !== -1).to.equal(true);
     });
 
     it("should throw navigation error by an unregistered domain", async function () {
@@ -33,6 +29,6 @@ describe("cross-origin, cross-frame communication", function () {
     });
 
     after(function () {
-        e2e.closeWindow(window);
+        navigator.closeWindow();
     });
 });

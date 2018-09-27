@@ -33,8 +33,7 @@ describe("cross-origin, cross-frame communication", function () {
         expect(searchInput != null).to.equal(true);
         searchInput.value = "rembrandt van rijn";
         const searchForm = searchInput.closest("form");
-        searchForm.submit();
-        const resultsPage = await navigator.loaded();
+        const resultsPage = await navigator.submit(searchForm);
         expect(resultsPage.documentElement.innerHTML.indexOf("Rembrandt - Wikipedia") !== -1).to.equal(true);
     });
 

@@ -8,13 +8,16 @@ module.exports = function (config) {
         ],
         frameworks: ["browserify", "mocha"],
         files: [
+            "test/server/root.js",
+            {pattern: "test/server/**/*", served: false, included: false},
             "index.js",
             "lib/**/*.js",
             "test/*.js",
-            {pattern: "test/pages/**/*", included: false}
+            {pattern: "test/pages/**/*", served: true, included: false}
         ],
         preprocessors: {
             "index.js": ["browserify"],
+            "test/server/root.js": ["browserify"],
             "lib/**/*.js": ["browserify"],
             "test/*.js": ["browserify"]
         },

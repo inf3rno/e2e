@@ -77,7 +77,11 @@ You can use any testing framework and assertion library. The only constraint her
 ## contribution
 
 Any contribution is welcome, however we have a few rules:
- - every commit must contain at least a single new test (or a fixed test) if it changes the library code
- - every commit must pass the tests to keep the master clean, so you need to squash the commits if you made a mistake
+ - every pull request must contain at least a single new test (or a fixed test) if it changes the library code
+ - every commit must pass the tests to keep the master green, so you need to squash the commits if you made a mistake
  - using ES6 features, like classes, arrow functions, destructuring is expected
  - keep the code format (WebStorm default), and the same coding style (e.g. double quotes by strings)
+
+Currently we have only a single master branch, so you can fork the code and
+[send the pull request from the fork](https://help.github.com/articles/creating-a-pull-request-from-a-fork/)
+if you want to contribute.

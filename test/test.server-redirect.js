@@ -1,14 +1,11 @@
 const expect = require("chai").expect;
 const e2e = require("./e2e");
 const server = require("./server/root");
-const navigator = e2e.openWindow({
-    debug: true,
-    silent: false
-});
+const navigator = e2e.openWindow();
 
-describe("redirection", function () {
+describe("server side redirection", function () {
 
-    it("should recognize redirection", async function () {
+    it("should not be affected by server side redirection", async function () {
         const redirectedPage = await navigator.load(`${server}/redirect`);
         expect(redirectedPage.location.href).to.equal(`${server}/`);
     });

@@ -7,7 +7,7 @@ describe("navigator.load", function () {
 
     it("should load empty page", async function () {
         const emptyPage = await navigator.load(`${pages}/empty.html`);
-        expect(emptyPage.location.href).to.match(/\/empty\.html$/);
+        expect(emptyPage.URL).to.match(/\/empty\.html$/);
         expect(emptyPage.title).to.match(/empty/i);
     });
 

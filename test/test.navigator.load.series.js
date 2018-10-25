@@ -7,13 +7,13 @@ describe("navigator.load.series", function () {
 
     it("should load empty page", async function () {
         const emptyPage = await navigator.load(`${pages}/empty.html`);
-        expect(emptyPage.location.href).to.match(/\/empty\.html$/);
+        expect(emptyPage.URL).to.match(/\/empty\.html$/);
         const seriesPage = await navigator.load(`${pages}/series.html`);
-        expect(seriesPage.location.href).to.match(/\/series\.html$/);
+        expect(seriesPage.URL).to.match(/\/series\.html$/);
         const emptyPage2 = await navigator.load(`${pages}/empty.html`);
-        expect(emptyPage2.location.href).to.match(/\/empty\.html$/);
+        expect(emptyPage2.URL).to.match(/\/empty\.html$/);
         const seriesPage2 = await navigator.load(`${pages}/series.html`);
-        expect(seriesPage2.location.href).to.match(/\/series\.html$/);
+        expect(seriesPage2.URL).to.match(/\/series\.html$/);
     });
 
     after(function () {

@@ -7,11 +7,11 @@ describe("navigator.follow", function () {
 
     it("should follow hyperlinks", async function () {
         const linkedPage = await navigator.load(`${pages}/hyperlink.html`);
-        expect(linkedPage.location.href).to.match(/\/hyperlink\.html$/);
+        expect(linkedPage.URL).to.match(/\/hyperlink\.html$/);
         const links = linkedPage.getElementsByTagName("a");
         const linkToFollow = links[0];
         const emptyPage = await navigator.follow(linkToFollow);
-        expect(emptyPage.location.href).to.match(/\/empty\.html$/);
+        expect(emptyPage.URL).to.match(/\/empty\.html$/);
     });
 
     after(function () {

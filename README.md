@@ -26,7 +26,7 @@ describe("navigator.submit", function () {
         textInput.value = someText;
         const form = textInput.closest("form");
         const resultsPage = await navigator.submit(form);
-        expect(resultsPage.location.href).to.equal(`${server}/echo/result`);
+        expect(resultsPage.URL).to.equal(`${server}/echo/result`);
         const resultParagraph = resultsPage.querySelector("p");
         expect(resultParagraph.innerText).to.equal(someText);
     });

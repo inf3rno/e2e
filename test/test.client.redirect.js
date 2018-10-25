@@ -7,9 +7,9 @@ describe("client side redirection", function () {
 
     it("should recognize scripted redirection", async function () {
         const redirectedPage = await navigator.load(`${pages}/redirect.html`);
-        expect(redirectedPage.location.href).to.match(/\/redirect\.html$/);
+        expect(redirectedPage.URL).to.match(/\/redirect\.html$/);
         const emptyPage = await navigator.loaded();
-        expect(emptyPage.location.href).to.match(/\/empty\.html$/);
+        expect(emptyPage.URL).to.match(/\/empty\.html$/);
     });
 
     after(function () {

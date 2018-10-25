@@ -7,7 +7,7 @@ describe("server side redirection", function () {
 
     it("should not trigger reload by server side redirection", async function () {
         const redirectedPage = await navigator.load(`${server}/redirect`);
-        expect(redirectedPage.location.href).to.equal(`${server}/`);
+        expect(redirectedPage.URL).to.equal(`${server}/`);
     });
 
     after(function () {

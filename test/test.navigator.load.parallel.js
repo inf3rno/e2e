@@ -9,7 +9,7 @@ describe("navigator.load.parallel", function () {
         const navigators = addresses.map(() => e2e.openWindow());
         const windows = navigators.map(navigator => navigator.window);
         const readyStates = () => windows.map(window => window.document.readyState);
-        const locations = () => windows.map(window => window.document.location.href);
+        const locations = () => windows.map(window => window.document.URL);
 
         expect(readyStates().every(readyState => readyState != "loading")).to.equal(true);
         const promises = navigators.map((navigator, index) => navigator.load(addresses[index]));

@@ -3,7 +3,7 @@ const e2e = require("./e2e");
 const pages = require("./pages");
 const navigator = e2e.openWindow();
 
-describe("scripted redirection", function () {
+describe("client side redirection", function () {
 
     it("should recognize scripted redirection", async function () {
         const redirectedPage = await navigator.load(`${pages}/redirect.html`);

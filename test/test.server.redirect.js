@@ -5,7 +5,7 @@ const navigator = e2e.openWindow();
 
 describe("server side redirection", function () {
 
-    it("should not be affected by server side redirection", async function () {
+    it("should not trigger reload by server side redirection", async function () {
         const redirectedPage = await navigator.load(`${server}/redirect`);
         expect(redirectedPage.location.href).to.equal(`${server}/`);
     });

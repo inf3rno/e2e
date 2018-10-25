@@ -6,31 +6,54 @@ End to end testing with client side javascript.
 
 ## example e2e test with the low-level API
 
-A simple test with NPM, Mocha and Chai.expect looks like this:
+Testing a simple express.js echo web application with NPM, Mocha and Chai.expect looks like this:
 
+test.js
 ```js
 const expect = require("chai").expect;
-const e2e = require("e2e-testing");
+const e2e = require("e2e");
+const server = "http://localhost:4444";
 const navigator = e2e.openWindow({
     silent: true
 });
 
-describe("testing a random page", function () {
+describe("navigator.submit", function () {
 
-    it("should be able to search on google.com", async function () {
-        const searchPage = await navigator.load("https://www.google.com");
-        const searchInput = searchPage.querySelector("input[type=text]");
-        expect(searchInput != null).to.equal(true);
-        searchInput.value = "rembrandt van rijn";
-        const searchForm = searchInput.closest("form");
-        const resultsPage = await navigator.submit(searchForm);
-        expect(resultsPage.documentElement.innerHTML.indexOf("Rembrandt - Wikipedia") !== -1).to.equal(true);
+    it("should be able to send a form", async function (){
+        const someText = `Random number: ${Math.random()}`;
+        const formPage = await navigator.load(`${server}/echo`);
+        const textInput = formPage.querySelector("input[name='someText']");
+        textInput.value = someText;
+        const form = textInput.closest("form");
+        const resultsPage = await navigator.submit(form);
+        expect(resultsPage.location.href).to.equal(`${server}/echo/result`);
+        const resultParagraph = resultsPage.querySelector("p");
+        expect(resultParagraph.innerText).to.equal(someText);
     });
 
     after(function () {
         navigator.closeWindow();
     });
 });
+```
+
+server.js
+```js
+const express = require("express");
+const application = express();
+const bodyParser = require("body-parser");
+const urlencoded = bodyParser.urlencoded({extended: false});
+const filters = require("xss-filters");
+
+application.get("/echo", function (request, response){
+    response.send('<form method="post" action="/echo/result" enctype="application/x-www-form-urlencoded; charset=utf-8"><input type="text" name="someText" /></form>');
+});
+
+application.post("/echo/result", urlencoded, function (request, response) {
+    response.send(`<p>${filters.inHTMLData(request.body.someText)}</p>`);
+});
+
+application.listen(4444);
 ```
 
 

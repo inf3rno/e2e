@@ -2,7 +2,7 @@ const expect = require("chai").expect;
 const e2e = require("./e2e");
 const pages = require("./pages");
 
-describe("navigation and parallel loads", function () {
+describe("navigator.load.parallel", function () {
 
     it("should be able to handle parallel loads in multiple windows", async function () {
         const addresses = [`${pages}/empty.html`, `${pages}/empty.html`, `${pages}/parallel.html`, `${pages}/parallel.html`];

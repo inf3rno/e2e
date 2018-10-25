@@ -5,7 +5,7 @@ const navigator = e2e.openWindow({
     silent: true
 });
 
-describe("navigation and scripting", function () {
+describe("client side script errors", function () {
 
     it("should capture console logs even from the first script in the head", async function () {
         const messages = [];
@@ -15,7 +15,7 @@ describe("navigation and scripting", function () {
         navigator.console.subscribe("log", logger);
         const scriptedPage = await navigator.load(`${pages}/scripted.html`);
         navigator.console.unsubscribe("log", logger);
-        expect(messages).to.deep.equal(["external-script.js", "scripted.html"]);
+        expect(messages).to.deep.equal(["externalScript.js", "scripted.html"]);
     });
 
     it("should capture script errors", async function () {
@@ -23,7 +23,7 @@ describe("navigation and scripting", function () {
         navigator.on("page:error", function (error) {
             messages.push(error.message);
         });
-        const scriptedPageWithErrors = await navigator.load(`${pages}/scripted-with-errors.html`);
+        const scriptedPageWithErrors = await navigator.load(`${pages}/scriptedWithErrors.html`);
         expect(messages.length).to.equal(2);
         expect(messages[0]).to.match(/not.+defined/i);
         expect(messages[1]).to.match(/error.+thrown/i);

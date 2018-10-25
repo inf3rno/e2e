@@ -1,5 +1,6 @@
 const expect = require("chai").expect;
 const e2e = require("./e2e");
+const task = e2e.task;
 const pages = require("./pages");
 const navigator = e2e.openWindow({
     silent: true
@@ -27,7 +28,7 @@ describe("client side script errors", function () {
         expect(messages.length).to.equal(2);
         expect(messages[0]).to.match(/not.+defined/i);
         expect(messages[1]).to.match(/error.+thrown/i);
-        await navigator.tock();
+        await task.macro();
         expect(messages.length).to.equal(3);
         expect(messages[2]).to.match(/promise.+rejected/i);
     });

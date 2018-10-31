@@ -1,6 +1,6 @@
 # e2e
 
-[![Build Status](https://travis-ci.org/inf3rno/e2e-testing.svg?branch=master)](https://travis-ci.org/inf3rno/e2e-testing)
+[![Build Status](https://travis-ci.org/inf3rno/e2e.svg?branch=master)](https://travis-ci.org/inf3rno/e2e)
 
 End to end testing with client side javascript.
 
@@ -115,16 +115,16 @@ Another option to use headless Chrome without Xvfb.
 
 ## API documentation
 
-You can find the [**API documentation on this wiki page**](https://github.com/inf3rno/e2e-testing/wiki/documentation).
+You can find the [**API documentation on this wiki page**](https://github.com/inf3rno/e2e/wiki/documentation).
 
 ## support of different frameworks and libraries
 
-Currently the project supports NPM + Karma + Chrome. If you need support for any kind of library, then [create an issue](https://github.com/inf3rno/e2e-testing/issues/new), and we will discuss it there.
+Currently the project supports NPM + Karma + Chrome. If you need support for any kind of library, then [create an issue](https://github.com/inf3rno/e2e/issues/new), and we will discuss it there.
 
 Supported libraries, frameworks, etc.:
 - package manager: NPM
 - test launcher and module bundler: Karma and Browserify
-- browser: Chrome only (further details about why Chrome only [in the wiki](https://github.com/inf3rno/e2e-testing/wiki/browser-support-and-browser-features))
+- browser: Chrome only (further details about why Chrome only [in the wiki](https://github.com/inf3rno/e2e/wiki/browser-support-and-browser-features))
 - testing and assertion library: anything which supports asynchronous testing, e.g. Mocha + Chai
 
 ## contribution

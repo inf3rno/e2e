@@ -1,6 +1,6 @@
 {
-  "name": "@inf3rno/e2e-testing",
-  "version": "0.1.0",
+  "name": "@inf3rno/e2e",
+  "version": "0.1.1",
   "description": "End to end testing with client side javascript.",
   "keywords": [
     "test",
@@ -13,10 +13,10 @@
   "author": "László Lajos Jánszky",
   "repository": {
     "type": "git",
-    "url": "https://github.com/inf3rno/e2e-testing"
+    "url": "https://github.com/inf3rno/e2e"
   },
   "bugs": {
-    "url": "https://github.com/inf3rno/e2e-testing/issues"
+    "url": "https://github.com/inf3rno/e2e/issues"
   },
   "main": "index.js",
   "scripts": {

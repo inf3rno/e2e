@@ -1,4 +1,4 @@
-# e2e-testing
+# e2e
 
 [![Build Status](https://travis-ci.org/inf3rno/e2e-testing.svg?branch=master)](https://travis-ci.org/inf3rno/e2e-testing)
 
@@ -11,7 +11,7 @@ Testing a simple express.js echo web application with NPM, Mocha and Chai.expect
 test.js
 ```js
 const expect = require("chai").expect;
-const e2e = require("e2e");
+const e2e = require("@inf3rno/e2e");
 const server = "http://localhost:4444";
 const navigator = e2e.openWindow({
     silent: true
@@ -60,7 +60,7 @@ application.listen(4444);
 ## installation with NPM
 
 ```sh
-npm install e2e-testing --save-dev
+npm install @inf3rno/e2e --save-dev
 ```
 
 ## usage with Karma and Chrome

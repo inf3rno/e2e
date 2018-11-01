@@ -113,6 +113,14 @@ Be aware that you need to add the `--no-sandbox` flag in your Karma config if yo
 
 Another option to use headless Chrome without Xvfb.
 
+### since Chrome 70 this library works only on localhost origins
+
+For now I skip the remote tests. At least the local server tests still work, losing those would kill this library...
+
+I have already sent a bug report, but I don't have high hopes to get back the remote page loading feature.
+
+Shame on you Chrome developers! :S
+
 ## API documentation
 
 You can find the [**API documentation on this wiki page**](https://github.com/inf3rno/e2e/wiki/documentation).

@@ -4,7 +4,14 @@ const navigator = e2e.openWindow({
     silent: true
 });
 
-describe("navigator.load.nonExistent", function () {
+describe("navigator.load.remote", function () {
+
+    // skipped until Chrome is fixed: https://bugs.chromium.org/p/chromium/issues/detail?id=575690
+
+    it("should be able to load google.com without an issue", async function () {
+        await navigator.load("https://www.google.com/");
+        expect(true).to.equal(true);
+    });
 
     it("should throw navigation error by a non-existent domain", async function () {
         let wasErrorThrown = false;
@@ -17,6 +24,7 @@ describe("navigator.load.nonExistent", function () {
         }
         expect(wasErrorThrown).to.equal(true);
     });
+
 
     after(function () {
         navigator.closeWindow();

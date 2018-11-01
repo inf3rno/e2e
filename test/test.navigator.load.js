@@ -9,6 +9,7 @@ describe("navigator.load", function () {
         const emptyPage = await navigator.load(`${pages}/empty.html`);
         expect(emptyPage.URL).to.match(/\/empty\.html$/);
         expect(emptyPage.title).to.match(/empty/i);
+        expect(emptyPage.readyState).to.equal("interactive");
     });
 
     after(function () {

@@ -1,30 +1,28 @@
 const expect = require("chai").expect;
 const e2e = require("./e2e");
-const task = e2e.task;
 const pages = require("./pages");
 const navigator = e2e.openWindow();
 
 describe("client side redirection", function () {
 
     it("should handle scripted redirection", async function () {
-        const redirectedPage = await navigator.load(`${pages}/redirect.html`);
-        expect(redirectedPage.URL).to.match(/\/redirect\.html$/);
+        const redirectAddress = `${pages}/redirect.html`;
+        const redirectedPage = await navigator.load(redirectAddress);
+        expect(redirectedPage.URL).to.equal(redirectAddress);
         const emptyPage = await navigator.redirected();
-        expect(emptyPage.URL).to.match(/\/empty\.html$/);
+        expect(emptyPage.URL).to.equal(`${pages}/empty.html`);
     });
 
     it("should throw error by unexpected scripted redirection", async function () {
         const redirectedPage = await navigator.load(`${pages}/redirect.html`);
-        let called = false;
-
-        function logger() {
-            called = true;
+        let navigationError;
+        try {
+            await navigator.followingNavigation;
         }
-
-        window.addEventListener("unhandledrejection", logger);
-        await task.defer(200);
-        window.removeEventListener("unhandledrejection", logger);
-        expect(called).to.equal(true);
+        catch (error) {
+            navigationError = error;
+        }
+        expect(navigationError instanceof e2e.error.UnexpectedNavigation).to.equal(true);
     });
 
     after(function () {

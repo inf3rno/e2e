@@ -4,17 +4,16 @@ const TaskManager = require("./TaskManager");
 describe("TaskManager", function () {
     it("should resolve in the micro, macro, idle, defer order", async function () {
         const callingOrder = [];
-        const task = new TaskManager();
-        const micro = task.micro().then(function (){
+        const micro = TaskManager.micro().then(function () {
             callingOrder.push("micro");
         });
-        const macro = task.macro().then(function (){
+        const macro = TaskManager.macro().then(function () {
             callingOrder.push("macro");
         });
-        const idle = task.idle().then(function (){
+        const idle = TaskManager.idle().then(function () {
             callingOrder.push("idle");
         });
-        const defer = task.defer(100).then(function (){
+        const defer = TaskManager.defer(100).then(function () {
             callingOrder.push("defer");
         });
         await Promise.all([micro, macro, idle, defer].sort(function (){

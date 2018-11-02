@@ -1,16 +1,14 @@
 const expect = require("chai").expect;
 const e2e = require("./e2e");
-const navigator = e2e.openWindow({
-    silent: true
-});
+const navigator = e2e.openWindow();
 
 describe("navigator.load.remote", function () {
 
-    // skipped until Chrome is fixed: https://bugs.chromium.org/p/chromium/issues/detail?id=575690
+    /* skipped until #118 is resolved */
 
     it("should be able to load google.com without an issue", async function () {
-        await navigator.load("https://www.google.com/");
-        expect(true).to.equal(true);
+        const googleMainPage = await navigator.load("https://www.google.com/");
+        expect(googleMainPage.URL).to.match(/google\.com/);
     });
 
     it("should throw navigation error by a non-existent domain", async function () {

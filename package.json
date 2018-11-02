@@ -1,6 +1,6 @@
 {
   "name": "@inf3rno/e2e",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "End to end testing with client side javascript.",
   "keywords": [
     "test",
@@ -34,5 +34,7 @@
     "mocha": "^5.2.0",
     "xss-filters": "^1.2.7"
   },
-  "dependencies": {}
+  "dependencies": {
+    "@inf3rno/promise.exposed": "^1.0.1"
+  }
 }

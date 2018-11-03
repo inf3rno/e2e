@@ -37,7 +37,7 @@ module.exports = function (config) {
         customLaunchers: {
             "ch": {
                 "base": "Chrome",
-                "flags": ["--disable-web-security"]
+                "flags": ["--disable-web-security", "--disable-site-isolation-trials"]
             }
         },
         reporters: ["progress"],

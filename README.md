@@ -6,29 +6,27 @@ End to end testing with client side javascript.
 
 ## example e2e test with the low-level API
 
-Testing a simple express.js echo web application with NPM, Mocha and Chai.expect looks like this:
+End to end testing a simple express.js echo application with Mocha and Chai on Chrome looks like this:
 
 test.js
 ```js
 const expect = require("chai").expect;
 const e2e = require("@inf3rno/e2e");
 const server = "http://localhost:4444";
-const navigator = e2e.openWindow({
-    silent: true
-});
+const navigator = e2e.openWindow();
 
-describe("navigator.submit", function () {
+describe("testing echo application", function () {
 
-    it("should be able to send a form", async function (){
-        const someText = `Random number: ${Math.random()}`;
+    it("should respond with the same text we send", async function (){
         const formPage = await navigator.load(`${server}/echo`);
-        const textInput = formPage.querySelector("input[name='someText']");
-        textInput.value = someText;
+        const textInput = formPage.querySelector("input[name='text']");
+        const text = `Some text with a random number: ${Math.random()}.`;
+        textInput.value = text;
         const form = textInput.closest("form");
+
         const resultsPage = await navigator.submit(form);
-        expect(resultsPage.URL).to.equal(`${server}/echo/result`);
         const resultParagraph = resultsPage.querySelector("p");
-        expect(resultParagraph.innerText).to.equal(someText);
+        expect(resultParagraph.innerText).to.equal(text);
     });
 
     after(function () {
@@ -46,11 +44,11 @@ const urlencoded = bodyParser.urlencoded({extended: false});
 const filters = require("xss-filters");
 
 application.get("/echo", function (request, response){
-    response.send('<form method="post" action="/echo/result" enctype="application/x-www-form-urlencoded; charset=utf-8"><input type="text" name="someText" /></form>');
+    response.send('<form method="post" action="/echo"><input name="text" /></form>');
 });
 
-application.post("/echo/result", urlencoded, function (request, response) {
-    response.send(`<p>${filters.inHTMLData(request.body.someText)}</p>`);
+application.post("/echo", urlencoded, function (request, response) {
+    response.send(`<p>${filters.inHTMLData(request.body.text)}</p>`);
 });
 
 application.listen(4444);
@@ -65,17 +63,15 @@ npm install @inf3rno/e2e --save-dev
 
 ## usage with Karma and Chrome
 
-The recommended way to use this library with Karma and a Chrome based custom launcher with disabled web security:
+The recommended way to use this library with Karma and a Chrome based custom launcher with disabled web security and isolation:
 ```js
 customLaunchers: {
     "ch": {
         "base": "Chrome",
-        "flags": ["--disable-web-security"]
+        "flags": ["--disable-web-security", "--disable-site-isolation-trials"]
     }
 },
 ```
-
-You can try headless Chrome too.
 
 ### starting the HTTP server with the tests automatically
 
@@ -112,14 +108,6 @@ before_install:
 Be aware that you need to add the `--no-sandbox` flag in your Karma config if you want to run Chrome in a container.
 
 Another option to use headless Chrome without Xvfb.
-
-### since Chrome 70 this library works only on localhost origins
-
-For now I skip the remote tests. At least the local server tests still work, losing those would kill this library...
-
-I have already sent a bug report, but I don't have high hopes to get back the remote page loading feature.
-
-Shame on you Chrome developers! :S
 
 ## API documentation
 

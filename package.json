@@ -18,6 +18,9 @@
   "bugs": {
     "url": "https://github.com/inf3rno/e2e/issues"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "main": "index.js",
   "scripts": {
     "test": "bash test.sh"

@@ -4,14 +4,14 @@ const navigator = e2e.openWindow();
 
 describe("navigator.load.remote", function () {
 
-    /* skipped until #118 is resolved */
-
     it("should be able to load google.com without an issue", async function () {
         const googleMainPage = await navigator.load("https://www.google.com/");
         expect(googleMainPage.URL).to.match(/google\.com/);
     });
 
-    it("should throw navigation error by a non-existent domain", async function () {
+    /* skipped until #126 is resolved*/
+
+    /*it("should throw navigation error by a non-existent domain", async function () {
         let wasErrorThrown = false;
         const invalidAddress = "http://www.qqqqqqqqqqq.net/";
         try {
@@ -21,7 +21,7 @@ describe("navigator.load.remote", function () {
             wasErrorThrown = true;
         }
         expect(wasErrorThrown).to.equal(true);
-    });
+     });*/
 
 
     after(function () {

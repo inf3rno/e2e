@@ -13,11 +13,11 @@ application.get("/redirect", function(request, response){
 });
 
 application.get("/echo", function (request, response){
-    response.send('<form method="post" action="/echo/result" enctype="application/x-www-form-urlencoded; charset=utf-8"><input type="text" name="someText" /></form>');
+    response.send('<form method="post" action="/echo"><input name="text" /></form>');
 });
 
-application.post("/echo/result", urlencoded, function (request, response) {
-    response.send(`<p>${filters.inHTMLData(request.body.someText)}</p>`);
+application.post("/echo", urlencoded, function (request, response) {
+    response.send(`<p>${filters.inHTMLData(request.body.text)}</p>`);
 });
 
 application.listen(4444);

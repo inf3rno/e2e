@@ -73,6 +73,10 @@ customLaunchers: {
 },
 ```
 
+**Warning: you should test only trusted pages with disabled web security!**
+
+Another option to serve the tests on the same origin as the tested application.
+
 ### starting the HTTP server with the tests automatically
 
 If you want to start your server before running the script, you have to use a bash script:

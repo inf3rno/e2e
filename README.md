@@ -4,6 +4,8 @@
 
 End to end testing with client side javascript.
 
+# I decided to freeze this project until Chrome developers make it clear whether they want to keep features like disable isolation trials, otherwise I won't have any way to access the JS engine of other windows synchronously and I don't want to work a lot for nothing.
+
 ## example e2e test with the low-level API
 
 End to end testing a simple express.js echo application with Mocha and Chai on Chrome looks like this:
